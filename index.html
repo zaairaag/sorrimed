@@ -70,13 +70,9 @@
             rx: 20px !important; 
             ry: 20px !important;
         }
-        .mermaid .cluster .cluster-label { 
+        .mermaid .cluster-label { 
             font-family: 'Montserrat', sans-serif !important; 
             font-weight: 700 !important;
-        }
-        .mermaid .cluster .cluster-label .nodeLabel {
-            margin-bottom: 20px !important;
-            padding-bottom: 15px !important;
         }
         .mermaid .edgeLabel { 
             background: #1e293b !important;
@@ -646,15 +642,12 @@ flowchart LR
             flowchart: {
                 htmlLabels: true,
                 curve: 'basis',
-                nodeSpacing: 80,
-                rankSpacing: 100,
-                padding: 40,
+                nodeSpacing: 60,
+                rankSpacing: 80,
+                padding: 30,
                 useMaxWidth: true,
                 defaultRenderer: 'dagre-wrapper',
-                diagramPadding: 40,
-                wrap: true,
-                wrapPadding: 20,
-                subGraphTitleMargin: { top: 20, bottom: 20 }
+                diagramPadding: 30
             },
             securityLevel: 'loose',
             // Additional premium settings
