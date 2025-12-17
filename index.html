@@ -103,7 +103,7 @@
                 <button onclick="switchTab('principal')" id="tab-principal" class="tab-active px-5 py-2.5 rounded-full text-sm font-semibold transition-all">Fluxo Principal</button>
                 <button onclick="switchTab('integracoes')" id="tab-integracoes" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-orbi-card hover:bg-white/10 transition-all">Integracoes</button>
                 <button onclick="switchTab('pendencias')" id="tab-pendencias" class="px-5 py-2.5 rounded-full text-sm font-semibold bg-orbi-card hover:bg-white/10 transition-all flex items-center gap-2">
-                    Pendencias <span class="bg-orbi-warning text-black text-xs px-2 py-0.5 rounded-full font-bold">12</span>
+                    Pendencias <span class="bg-orbi-warning text-black text-xs px-2 py-0.5 rounded-full font-bold">6</span>
                 </button>
             </div>
         </div>
@@ -278,116 +278,6 @@ flowchart TD
                     <h2 class="font-display text-3xl font-bold mb-3 bg-gradient-to-r from-white via-orbi-textSec to-white bg-clip-text text-transparent">4 - Arquitetura de Integrações</h2>
                     <p class="text-orbi-textSec text-lg">Como os sistemas se conectam por trás</p>
                 </div>
-                <div class="section-card rounded-2xl p-8 diagram-container" style="max-height: 70vh;">
-                    <div class="diagram-wrapper" id="wrapper-integracoes">
-                        <pre class="mermaid">
-flowchart LR
-    subgraph PACIENTE ["👤 PACIENTE"]
-        P1["📱 WhatsApp do Paciente"]
-    end
-
-    subgraph WHATSAPP ["💬 WHATSAPP BUSINESS API"]
-        direction TB
-        W1["☁️ Meta Cloud API ✓"]
-        W2["📥 Recebe mensagens"]
-        W3["📤 Envia respostas"]
-    end
-
-    subgraph AGENTE ["🤖 AGENTE EVA"]
-        direction TB
-        E1["🧠 Motor de IA"]
-        E2["⚙️ Regras de Negócio"]
-        E3["🔀 Roteamento"]
-        E4["🔄 Follow-up"]
-    end
-
-    subgraph CLINICORP ["🏥 CLINICORP"]
-        direction TB
-        C1["📅 Consulta Agenda ✓"]
-        C2["➕ Cria Agendamento ✓"]
-        C3["🔄 Atualiza Status ✓"]
-        C4["📝 Remarcação ⏳"]
-    end
-
-    subgraph CLINIA ["📊 CRM CLINIA"]
-        direction TB
-        CL1["👤 Cadastro de Lead ⏳"]
-        CL2["📈 Status do Funil ⏳"]
-        CL3["📜 Histórico ⏳"]
-    end
-
-    subgraph CONTEUDO ["📍 CONTEÚDO"]
-        direction TB
-        CO1["🗺️ Google Maps ⏳"]
-        CO2["⭐ Google Reviews ⏳"]
-        CO3["📍 Endereços ⏳"]
-    end
-
-    subgraph HUB ["🎯 HUB ORBI"]
-        direction TB
-        H1["📋 Logs e Registro ✓"]
-        H2["📊 Analytics ✓"]
-    end
-
-    P1 ==> W1
-    W1 --> W2
-    W3 --> W1
-    W1 ==> P1
-    
-    W2 ==> E1
-    E1 --> E2
-    E2 --> E3
-    E3 --> E4
-    E1 ==> W3
-    
-    E2 --> C1
-    E2 --> C2
-    E2 --> C3
-    E2 -.->|"⏳"| C4
-    
-    E2 -.->|"⏳"| CL1
-    E2 -.->|"⏳"| CL2
-    E2 -.->|"⏳"| CL3
-    
-    E2 -.->|"⏳"| CO1
-    E2 -.->|"⏳"| CO2
-    E2 -.->|"⏳"| CO3
-    
-    E1 --> H1
-    E1 --> H2
-
-    style P1 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style W1 fill:#075e54,stroke:#25D366,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style W2 fill:#128C7E,stroke:#25D366,stroke-width:2.5px,color:#fff,stroke-dasharray:0
-    style W3 fill:#128C7E,stroke:#25D366,stroke-width:2.5px,color:#fff,stroke-dasharray:0
-    style E1 fill:#9d174d,stroke:#f472b6,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style E2 fill:#6a1f5a,stroke:#DC0073,stroke-width:2.5px,color:#fff,stroke-dasharray:0
-    style E3 fill:#6a1f5a,stroke:#DC0073,stroke-width:2.5px,color:#fff,stroke-dasharray:0
-    style E4 fill:#6a1f5a,stroke:#DC0073,stroke-width:2.5px,color:#fff,stroke-dasharray:0
-    style C1 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style C2 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style C3 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style C4 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CL1 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CL2 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CL3 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CO1 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CO2 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style CO3 fill:#78350f,stroke:#f59e0b,stroke-width:4px,color:#fff,stroke-dasharray:5 5
-    style H1 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-    style H2 fill:#0f4c75,stroke:#10b981,stroke-width:3px,color:#fff,stroke-dasharray:0
-
-    style PACIENTE fill:#0a1628,stroke:#10b981,stroke-width:3px,color:#10b981,stroke-dasharray:0
-    style WHATSAPP fill:#0a1628,stroke:#25D366,stroke-width:3px,color:#25D366,stroke-dasharray:0
-    style AGENTE fill:#0a1628,stroke:#DC0073,stroke-width:3px,color:#DC0073,stroke-dasharray:0
-    style CLINICORP fill:#0a1628,stroke:#3b82f6,stroke-width:3px,color:#3b82f6,stroke-dasharray:0
-    style CLINIA fill:#0a1628,stroke:#8b5cf6,stroke-width:3px,color:#8b5cf6,stroke-dasharray:0
-    style CONTEUDO fill:#0a1628,stroke:#f59e0b,stroke-width:3px,color:#f59e0b,stroke-dasharray:0
-    style HUB fill:#0a1628,stroke:#06b6d4,stroke-width:3px,color:#06b6d4,stroke-dasharray:0
-                        </pre>
-                    </div>
-                </div>
-                
                 <!-- Status Cards -->
                 <div class="grid md:grid-cols-4 gap-5 mt-8">
                     <div class="section-card rounded-xl p-5 hover:border-[#25D366] transition-all group">
@@ -395,7 +285,7 @@ flowchart LR
                             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center text-xl font-bold shadow-lg shadow-[#25D366]/30 group-hover:scale-110 transition-transform">W</div>
                             <div>
                                 <h4 class="font-bold text-base">WhatsApp</h4>
-                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">CONFIGURADO</span>
+                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">CONFIRMADO</span>>
                             </div>
                         </div>
                         <p class="text-xs text-orbi-textSec leading-relaxed">Número de teste: Orbi | Número oficial: go-live</p>
@@ -405,7 +295,7 @@ flowchart LR
                             <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-xl font-bold shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform">C</div>
                             <div>
                                 <h4 class="font-bold text-base">Clinicorp</h4>
-                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">INTEGRADO</span>
+                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">CONFIRMADO</span>
                             </div>
                         </div>
                         <p class="text-xs text-orbi-textSec leading-relaxed">Agenda + Agendamento OK | Remarcação: definir regras</p>
@@ -420,15 +310,15 @@ flowchart LR
                         </div>
                         <p class="text-xs text-orbi-textSec leading-relaxed">Integração automática ou manual? Fonte oficial do funil?</p>
                     </div>
-                    <div class="section-card rounded-xl p-5 hover:border-rose-500 transition-all group">
+                    <div class="section-card rounded-xl p-5 hover:border-emerald-500 transition-all group">
                         <div class="flex items-center gap-3 mb-3">
-                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 flex items-center justify-center text-xl font-bold shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform">CT</div>
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center text-xl font-bold shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform">CT</div>
                             <div>
                                 <h4 class="font-bold text-base">Conteúdo</h4>
-                                <span class="text-xs text-amber-400 font-semibold bg-amber-500/10 px-2 py-0.5 rounded-full">PENDENTE</span>
+                                <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded-full">CONFIRMADO</span>
                             </div>
                         </div>
-                        <p class="text-xs text-orbi-textSec leading-relaxed">Links Maps, Reviews, endereços - aguardando cliente</p>
+                        <p class="text-xs text-orbi-textSec leading-relaxed">Links Maps, Reviews, endereços - recebido ✓</p>
                     </div>
                 </div>
             </div>
@@ -517,61 +407,7 @@ flowchart LR
                         </div>
                     </div>
 
-                    <!-- Handoff Humano -->
-                    <div class="section-card rounded-xl p-6 hover:border-rose-500 transition-all group">
-                        <div class="flex items-start gap-5">
-                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-rose-500/20 to-rose-600/20 border-2 border-rose-500/30 flex items-center justify-center text-2xl font-bold shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-rose-500/20">3</div>
-                            <div class="flex-1">
-                                <h3 class="font-bold text-lg mb-4 flex items-center gap-3">
-                                    <span>Handoff Humano</span>
-                                    <span class="text-xs bg-gradient-to-r from-rose-500 to-rose-600 text-white px-3 py-1 rounded-full font-bold shadow-lg shadow-rose-500/30">4 itens</span>
-                                    <span class="text-xs bg-gradient-to-r from-rose-500 to-orange-500 text-white px-3 py-1 rounded-full font-bold shadow-lg animate-pulse">📋 REUNIÃO</span>
-                                </h3>
-                                <ul class="space-y-3 text-sm">
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-rose-500 bg-rose-500/10 flex items-center justify-center shrink-0 group-hover:border-rose-400 transition-colors"></span>
-                                        <span>Lista oficial de gatilhos para handoff</span>
-                                    </li>
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-rose-500 bg-rose-500/10 flex items-center justify-center shrink-0 group-hover:border-rose-400 transition-colors"></span>
-                                        <span>Canal/time de destino</span>
-                                    </li>
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-rose-500 bg-rose-500/10 flex items-center justify-center shrink-0 group-hover:border-rose-400 transition-colors"></span>
-                                        <span>Horário de atendimento do time humano</span>
-                                    </li>
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-rose-500 bg-rose-500/10 flex items-center justify-center shrink-0 group-hover:border-rose-400 transition-colors"></span>
-                                        <span>SLA: tempo máximo para humano assumir</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- CRM Clinia -->
-                    <div class="section-card rounded-xl p-6 hover:border-blue-500 transition-all group">
-                        <div class="flex items-start gap-5">
-                            <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/20 to-blue-600/20 border-2 border-blue-500/30 flex items-center justify-center text-2xl font-bold shrink-0 group-hover:scale-110 transition-transform shadow-lg shadow-blue-500/20">4</div>
-                            <div class="flex-1">
-                                <h3 class="font-bold text-lg mb-4 flex items-center gap-3">
-                                    <span>CRM Clinia</span>
-                                    <span class="text-xs bg-gradient-to-r from-blue-500 to-blue-600 text-white px-3 py-1 rounded-full font-bold shadow-lg shadow-blue-500/30">2 itens</span>
-                                    <span class="text-xs bg-gradient-to-r from-rose-500 to-orange-500 text-white px-3 py-1 rounded-full font-bold shadow-lg animate-pulse">📋 REUNIÃO</span>
-                                </h3>
-                                <ul class="space-y-3 text-sm">
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-blue-500 bg-blue-500/10 flex items-center justify-center shrink-0 group-hover:border-blue-400 transition-colors"></span>
-                                        <span>Terá integração automática ou registro manual?</span>
-                                    </li>
-                                    <li class="flex items-center gap-3 text-orbi-textSec hover:text-white transition-colors">
-                                        <span class="w-6 h-6 rounded-lg border-2 border-blue-500 bg-blue-500/10 flex items-center justify-center shrink-0 group-hover:border-blue-400 transition-colors"></span>
-                                        <span>Qual será a fonte oficial do funil?</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
 
